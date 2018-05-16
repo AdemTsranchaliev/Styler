@@ -1,0 +1,91 @@
+<div class="page-links">
+    <div class="container">
+        <div class="pull-left">
+            <ul class="link-list">
+                <li><a class="active" th:href="@{/editProfile}">Редактирай профил</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END Page links -->
+
+<section class="no-border-bottom section-sm">
+    <div class="container">
+        <header class="section-header">
+            <span>Настройки</span>
+        </header>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h6>Profile</h6>
+                    </div>
+
+                    <div class="card-block">
+                        <form class="form-horizontal" th:action="@{/edit/profile/{id}(id=${currentUser.id})}"  method="post">
+                            <div class="form-group">
+                                <label for="input1" class="col-sm-2 control-label">Потребителско име</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input1" name="fullName" th:value="${currentUser.fullName}" required="required"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input5" class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input2" name="email" th:value="${currentUser.email}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input4" class="col-sm-2 control-label">Местоживеене</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input3"  name="location" th:value="${currentUser.location}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input5" class="col-sm-2 control-label">Facebook</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input4" name="facebook" th:value="${currentUser.facebook}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input5" class="col-sm-2 control-label">Twitter</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input5" name="twitter" th:value="${currentUser.twitter}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input5" class="col-sm-2 control-label">Own website</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input6" name="ownWeb" th:value="${currentUser.ownWeb}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input5" class="col-sm-2 control-label">Instagram</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input7" name="instagram" th:value="${currentUser.instagram}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input5" class="col-sm-2 control-label">Мото</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input8" name="motto" th:value="${currentUser.motto}"/>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button class="btn btn-primary btn-sm" type="submit">Запази</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

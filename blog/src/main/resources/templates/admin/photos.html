@@ -1,0 +1,37 @@
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100">
+                <table>
+                    <thead>
+                    <tr class="table100-head">
+                        <th class="column1">Title</th>
+                        <th class="column2">Description</th>
+                        <th class="column3">Photo</th>
+                        <th class="column4">uploaded_on</th>
+                        <th class="column5">Назад</th>
+                        <th class="column6">Options</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="image : ${images}">
+                        <tr>
+                            <td class="column1" th:text="${image.title}">iPhone X 64Gb Grey</td>
+                            <td class="column2" th:text="${image.description}">$999.00</td>
+                            <td class="column3" ><a th:href="@{http://46.40.82.125:85/upload-dir/{id}(id=${image.pathToImage})}">Снимка</a> </td>
+                            <td class="column4" th:text="${image.uploaded_on}">1</td>
+                            <td class="column5"><a th:href="@{/allUsers}">Назад</a></td>
+                            <td class="column6">
+                                <a class="btn btn-edit btn-sm" th:href="@{/еditPhoto/{id}(id=${image.id})}">Редактирай</a>
+                                <a class="btn btn-delete btn-sm"  th:href="@{/delete/{id}(id=${image.id})}">Изтрий</a>
+                            </td>
+                        </tr>
+                    </th:block>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

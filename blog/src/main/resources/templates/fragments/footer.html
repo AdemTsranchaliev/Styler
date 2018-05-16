@@ -1,0 +1,58 @@
+<footer th:fragment="footer" class="site-footer no-margin-top">
+     <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-4">
+            <h6>Какво е Styler</h6>
+            <p class="text-justify"><strong>Купи си страхотна дреха, но не знаеш, с какво да я съчетаеш?
+              Styler ще го направи вместо теб!</strong><br/> Styler е платформа, в която ще намериш хиляди нови начини, по които да изразиш стила си.
+              Използвай таговете, за да насочиш онлайн стилиста към нужната ти категория.
+              Остави всичко останало в нашите ръце!</p>
+          </div>
+
+          <div class="col-xs-12 col-sm-4 col-md-4">
+            <center>
+            <h6>Карта на сайта</h6>
+
+            <ul class="footer-links">
+
+              <li><a th:href="@{/}">Начало</a></li>
+              <li><a th:href="@{/find}">Открий</a></li>
+              <li><a th:href="@{/forUs}">За нас</a></li>
+              <li><a th:href="@{/contactUs}">Контакти</a></li>
+              <li sec:authorize="isAuthenticated()" th:if="${userRole=='ROLE_ADMIN'}">
+                <a th:href="@{/allUsers}">Админ панел</a>
+              </li>
+              <li sec:authorize="isAuthenticated()"  th:if="${userRole=='ROLE_ADMIN'}">
+                <a th:href="@{/messages}">Съобщения</a>
+              </li>
+
+            </ul>
+            </center>
+          </div>
+          <div class="col-xs-12 col-sm-4 col-md-4">
+            <h6>Бюлетин</h6>
+            <p><strong>Абонирай се</strong> за ежеседмичния ни бюлетин, в който ще намериш нови и вдъхновяващи модни статии:</p>
+            <br/>
+            <form th:action="@{/subscript}" method="post">
+            <input type="email" class="form-control" name="email" placeholder="Въведете имейл адрес" required="required"/>
+            <button class="btn btn-primary btn-sm btn-block" type="submit"><i class="fa fa-paper-plane"></i> Абониране</button>
+            </form>
+          </div>
+        </div>
+
+
+
+        <hr/>
+      </div>
+      <!-- END Top section -->
+
+      <!-- Bottom section -->
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p class="copyright-text">ВСИЧКИ ПРАВА ЗАПАЗЕНИ 2018</p>
+          </div>
+        </div>
+      </div>
+
+</footer>

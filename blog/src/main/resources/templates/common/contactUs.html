@@ -1,0 +1,37 @@
+<section class="no-border-bottom">
+    <div class="container">
+        <header class="section-header">
+            <span>Контакти</span>
+            <h2>Свържете се с нас</h2>
+
+        </header>
+
+        <div class="row equal-cols">
+
+
+            <div class="col-xs-12 col-sm-12">
+
+
+
+                <div class="card">
+                    <div class="card-header">
+                        <h6>Напишете ни съобщение</h6>
+                    </div>
+
+                    <div class="card-block">
+                        <form th:action="@{/contactUs}" method="post" class="contact-form alt clear-fix">
+                            <input type="email" name="email" class="form-control input-lg" placeholder="Имейл" required="required"/>
+                            <br/>
+                            <textarea class="form-control" name="message" rows="9" placeholder="Съобщение" required="required"></textarea>
+                            <br/>
+                            <button type="submit" class="btn btn-primary btn-block">Изпрати</button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>

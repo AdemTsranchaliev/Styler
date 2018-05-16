@@ -1,0 +1,31 @@
+<section class="no-border-bottom">
+    <div class="container">
+        <header class="section-header">
+            <h2>Търсене</h2>
+        </header>
+        <div class="row equal-cols">
+            <div class="col-xs-12 col-sm-12">
+                <div class="card">
+                    <div class="card-block">
+                        <form th:action="@{/search}" method="post" class="contact-form alt clear-fix">
+                            <input type="text" name="search" class="form-control input-lg" placeholder="Преоткрий своята визия" required="required"/>
+                            <br/>
+                            <br/>
+
+                                <label class="radio inline">
+                                    <input type="radio" name="choice" value="hash-code" th:checked="@{true}" />
+                                    <span> Визии </span>
+                                </label>
+                                <label class="radio inline">
+                                    <input type="radio" name="choice" value="user"/>
+                                    <span>Потребители </span>
+                                </label>
+
+                            <button type="submit" class="btn btn-primary btn-block">Търсене</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

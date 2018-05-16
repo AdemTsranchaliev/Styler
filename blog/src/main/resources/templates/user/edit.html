@@ -1,0 +1,87 @@
+<div class="page-links">
+    <div class="container">
+        <div class="pull-left">
+            <ul class="link-list">
+                <li><a class="active" th:href="@{/editProfile}">Профил</a></li>
+                <li><a th:href="@{/editProfileSocialNetworks}">Социални мрежи</a></li>
+                <li><a th:href="@{/editProfileSecurity}">Сигурност</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END Page links -->
+
+<section class="no-border-bottom section-sm">
+    <div class="container">
+        <header class="section-header">
+            <span>Настройки</span>
+            <h3>Настройки на профила</h3>
+            <p>Промени своето име, мото, местоживеене и аватар</p>
+        </header>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h6>Profile</h6>
+                    </div>
+
+                    <div class="card-block">
+                        <form class="form-horizontal" th:action="@{/editProfile}"  method="post">
+                            <div class="form-group">
+                                <label for="input1" class="col-sm-2 control-label">Потребителско име</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input1" name="fullName" th:value="${user.fullName}" required="required"/>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="input4" class="col-sm-2 control-label">Местоживеене</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input4"  name="location" th:value="${user.location}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input5" class="col-sm-2 control-label">Мото</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="input5" name="motto" th:value="${user.motto}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button class="btn btn-primary btn-sm" type="submit">Запази</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h6>Avatar</h6>
+                    </div>
+
+                    <div class="card-block">
+                        <div class="syntax-error" th:if="${inputError}">
+                            <p class="errorMsg">За да продължите, трябва да изберете снимка</p>
+                        </div>
+                        <div class="syntax-error" th:if="${extentionError}">
+                            <p class="errorMsg">Разширението на файла трябва да бъде ".jpg" или ".png"</p>
+                        </div>
+                        <form method="post" enctype="multipart/form-data"  th:action="@{/uploadProfilePicture}">
+                            <input type="file" class="dropify"   name="file"/>
+                            <br/>
+                            <button class="btn btn-primary btn-sm" type="submit">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

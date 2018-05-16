@@ -1,0 +1,36 @@
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100">
+                <table>
+                    <thead>
+                    <tr class="table100-head">
+                        <th class="column1">Имейл</th>
+                        <th class="column2">Facebook</th>
+                        <th class="column3">Twitter</th>
+                        <th class="column4">Instagram</th>
+                        <th class="column5">Own web</th>
+                        <th class="column6">Назад</th>
+                        <th class="column7">Опция</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="column1" th:text="${visitUser.email}">Email</td>
+                            <td class="column2" th:text="${visitUser.facebook}">facebook</td>
+                            <td class="column3" th:text="${visitUser.twitter}">twitter</td>
+                            <td class="column4" th:text="${visitUser.instagram}">instagram</td>
+                            <td class="column5" th:text="${visitUser.ownWeb}">ownWeb</td>
+                            <td class="column6"><a th:href="@{/allUsers}">Назад</a></td>
+                            <td class="column7">
+                                <a class="btn btn-edit btn-sm" th:href="@{/edit/profile/{id}(id=${visitUser.id})}">Редактирай</a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

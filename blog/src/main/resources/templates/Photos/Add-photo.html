@@ -1,0 +1,76 @@
+<section class="no-border-bottom">
+    <div class="container">
+        <header class="section-header">
+            <h2>Качи визия</h2>
+            <p>Измисли заглавие, качи снимка, въведи описание и тагове, за да създадеш нова визия</p>
+        </header>
+
+        <form th:action="@{/uploadPhoto}" class="form-horizontal1" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-sm-12 col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h6>Детайли</h6>
+                        </div>
+                        <div class="syntax-error" th:if="${InputError}">
+                            <p class="errorMsg">Трябва да попълните всички полета*</p>
+                        </div>
+                        <div class="card-block">
+                            <div class="form-group">
+                                <div class="syntax-error" th:if="${ErrorUniqueTitle}">
+                                    <p class="errorMsg">Заглавието на снимката трябва да бъде уникално, използвали сте
+                                        това заглавие във друга ваша снимка</p>
+                                </div>
+                                <input type="text" class="form-control input-lg" placeholder="Заглавие" name="Title"
+                                       required="required"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Качи снимка</label>
+                                <div class="syntax-error" th:if="${ErrorExtention}">
+                                    <p class="errorMsg">Разширението на файла трябва да бъде ".jpg" или ".png"</p>
+                                </div>
+                                <input type="file" class="dropify" name="file" data-max-height="20000"
+                                       data-max-width="20000" required="required"/>
+                                <span class="help-block">Препоръчаният размер е 700x600</span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="input-desc">От къде сте купили вашата дреха?</label>
+                                <textarea class="form-control" id="input-desc" rows="6" name="description"
+                                          ></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h6>Тагове</h6>
+                        </div>
+
+                        <div class="card-block">
+                            <div class="syntax-error" th:if="${hashTagError}">
+                                <p class="errorMsg">Невалиден/ни таг/ове</p>
+                            </div>
+                            <div class="form-group">
+                                <input name="hashTag" class="form-control" required="required" minlength="4" placeholder="#Риза #Панталон #Рокля" pattern="(#[A-Za-z1-9а-яА-Я]{2,} ?)+" title="Трябва да съдържа поне един таг, който трябва да е по-дълъг от 4 символа както всеки следващ таг" />
+                                <span class="help-block">Слагайте # пред всеки таг и ги отделяйте със спейс</span>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-block" type="submit">Качи визия</button>
+
+                </div>
+            </div>
+        </form>
+
+    </div>
+</section>

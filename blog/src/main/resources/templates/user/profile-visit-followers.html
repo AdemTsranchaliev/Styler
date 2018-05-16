@@ -1,0 +1,121 @@
+<div class="profile-head">
+    <div class="container">
+        <img style="height: 160px;"
+             th:src="@{http://46.40.82.125:85/{id}(id=${visitedUser.profilePicture})}" alt="avatar"/>
+        <h5 th:text="${visitedUser.fullName}"></h5>
+        <p class="lead" th:text="${visitedUser.motto}"></p>
+        <p th:text="${visitedUser.location}">*описние*</p>
+        <p class="lead" th:if="${visitedUserRole=='ROLE_ADMIN'}"><span>Admin</span></p>
+        <p class="lead" th:if="${visitedUserRole=='ROLE_MODERATOR'}"><span>MODERATOR</span></p>
+
+        <ul class="social-icons">
+            <li>
+                <a th:if="${visitedUser.facebook!=''}" class="facebook" th:href="${visitedUser.facebook}"><i
+                        class="fa fa-facebook"></i></a>
+            </li>
+            <li>
+                <a th:if="${visitedUser.twitter!=''}" class="twitter" th:href="${visitedUser.twitter}"><i
+                        class="fa fa-twitter"></i></a>
+            </li>
+            <li>
+                <a th:if="${visitedUser.instagram!=''}" class="instagram" th:href="${visitedUser.instagram}"><i
+                        class="fa fa-instagram"></i></a>
+            </li>
+            <li>
+                <a th:if="${visitedUser.ownWeb!=''}" th:href="${visitedUser.ownWeb}"><i class="fa fa-globe"></i></a>
+            </li>
+        </ul>
+
+        <div class="row bottom-bar">
+            <ul class="col-sm-12 col-md-6 action-buttons" th:switch="${isItFollowed}">
+                <form th:if="${currentUserRole=='ROLE_ADMIN'}" th:action="@{/makeAdmin}" method="post">
+                    <input type="hidden" name="requestForChangeRole" th:value="${visitedUser.id}"/>
+                    <li th:if="${visitedUserRole=='ROLE_USER'||visitedUserRole=='ROLE_MODERATOR'}"><input type="submit"
+                                                                                                          class="btn btn-success btn-outline btn-sm"
+                                                                                                          value="Направи АДМИН" name="RequestFor"/></li>
+                    <li th:if="${visitedUserRole=='ROLE_ADMIN'||visitedUserRole=='ROLE_MODERATOR'}"><input type="submit"
+                                                                                                           class="btn btn-success btn-outline btn-sm"
+                                                                                                           value="Направи потребител" name="RequestFor"/></li>
+                    <li th:if="${visitedUserRole=='ROLE_USER'||visitedUserRole=='ROLE_ADMIN'}"><input type="submit"
+                                                                                                      class="btn btn-success btn-outline btn-sm"
+                                                                                                      value="Направи МОДЕРАТОР" name="RequestFor"/></li>
+                </form>
+                <form th:case="${false}" th:action="@{/follow}" method="post">
+                    <input type="hidden" name="requestToFollowUser" th:value="${visitedUser.id}"/>
+                    <input type="hidden" name="image" th:value="${false}"/>
+                    <li><input type="submit" class="btn btn-success btn-outline btn-sm" value="Последвай"/></li>
+                </form>
+                <form th:case="${true}" th:action="@{/unfollow}" method="post">
+                    <input type="hidden" name="requestToFollowUser" th:value="${visitedUser.id}"/>
+                    <input type="hidden" name="image" th:value="${false}"/>
+                    <li><input type="submit" class="btn btn-success btn-outline btn-sm" value="Последвано"/></li>
+                </form>
+            </ul>
+            <ul class="col-sm-12 col-md-6 tab-list">
+                <li><a th:href="@{/profile/{id}(id=${visitedUser.id})}"><i>Визии</i><span
+                        th:text="${numberOfImages}"></span></a>
+                </li>
+                <li class="hidden-xs"><a
+                        th:href="@{/profile/{id}/likes(id=${visitedUser.id})}"><i>Харесвания</i><span
+                        th:text="${countLikedImages}">1.6K</span></a></li>
+                <li th:if="${follower}" class="active"><a th:href="@{/profile/{id}/followers(id=${visitedUser.id})}"><i>Последователи</i><span
+                        th:text="${userFollowersCount}">2.3K</span></a></li>
+                <li th:if="${follower}"><a
+                        th:href="@{/profile/{id}/followings(id=${visitedUser.id})}"><i>Следвани</i><span
+                        th:text="${userFollowingCount}">279</span></a></li>
+                <li th:if="${following}"><a
+                        th:href="@{/profile/{id}/followers(id=${visitedUser.id})}"><i>Последователи</i><span
+                        th:text="${userFollowersCount}">2.3K</span></a></li>
+                <li th:if="${following}" class="active"><a
+                        th:href="@{/profile/{id}/followings(id=${visitedUser.id})}"><i>Следвани</i><span
+                        th:text="${userFollowingCount}">279</span></a></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END Profile head -->
+
+<!-- User list -->
+<section class="no-border-bottom section-sm">
+    <div class="container">
+
+        <div class="row" th:if="follower">
+
+            <!-- User widget -->
+            <th:block th:each="userFollower : ${userFollowers}">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="user-widget-mini">
+                        <a th:href="@{/profile/{id}(id=${userFollower.id})}"><img height="100"
+                                                                                  th:src="@{http://46.40.82.125:85/{id}(id=${userFollower.profilePicture})}"
+                                                                                  alt="avatar"/></a>
+                        <h5><a th:href="@{/profile/{id}(id=${userFollower.id})}" th:text="${userFollower.fullName}"></a>
+                        </h5>
+
+                    </div>
+                </div>
+            </th:block>
+
+        </div>
+        <div class="row" th:if="following">
+
+            <!-- User widget -->
+            <th:block th:each="userFollowing : ${userFollowings}">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="user-widget-mini">
+                        <a th:href="@{/profile/{id}(id=${userFollowing.id})}"><img height="100"
+                                                                                   th:src="@{http://46.40.82.125:85/{id}(id=${userFollowing.profilePicture})}"
+                                                                                   alt="avatar"/></a>
+                        <h5><a th:href="@{/profile/{id}(id=${userFollowing.id})}"
+                               th:text="${userFollowing.fullName}"></a></h5>
+                    </div>
+                </div>
+            </th:block>
+
+        </div>
+    </div>
+</section>
+<!-- END User list -->
+
+
+<!-- END Main container -->

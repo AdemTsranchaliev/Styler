@@ -1,0 +1,120 @@
+<section class="no-border-bottom">
+    <div class="container">
+        <header class="section-header">
+            <h3 th:text="${image.title}">Facebook Groups Marketing Site</h3>
+            <p>Публикувана на <span th:text="${image.uploaded_on}"></span></p>
+        </header>
+
+
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+
+                <!-- Shot and details -->
+                <div class="card no-margin-top">
+                    <div class="card-block">
+
+                        <center>
+                            <img th:src="@{http://46.40.82.125:85/upload-dir/{id}(id=${image.pathToImage})}" alt=""/>
+                        </center>
+                        <div >
+                            <br/>
+                            <a class="btnImg" th:href="@{/еditPhoto/{id}(id=${image.id})}" th:if="${user.id==image.user.id||userRole=='ROLE_ADMIN'}">Редактирай</a>
+                            <a class="btnImg" th:href="@{/delete/{id}(id=${image.id})}" th:if="${user.id==image.user.id||userRole=='ROLE_ADMIN'}">Изтрий</a>
+                            <a class="btn btn-delete btn-sm" th:href="@{/report/{id}(id=${image.id})}">Докладвай</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Shot and details -->
+
+            </div>
+
+            <aside class="col-xs-12 col-md-4 shot-sidebar">
+                <!-- User widget -->
+                <div class="sidebar-block">
+                    <div class="shot-by-widget">
+                        <a th:href="@{/profile/{id}(id=${image.user.id})}"><img height="60"
+                                                                                th:src="@{http://46.40.82.125:85/{id}(id=${image.user.profilePicture})}"
+                                                                                alt="avatar"/></a>
+                        <a class="username" th:href="@{/profile/{id}(id=${image.user.id})}"
+                           th:text="${image.user.fullName}"></a>
+                        <p class="title" th:text="${image.user.location}">Social company</p>
+                        <p class="subtitle" th:text="${image.user.motto}">Ut pulvinar libero </p>
+
+
+                        <ul class="user-stats">
+                            <li><a th:href="@{/profile/{id}(id=${image.user.id})}"><i>Визии</i><span th:text="${numberOfImages}">125</span></a>
+                            </li>
+                            <li><a th:href="@{/profile/{id}/followers(id=${image.user.id})}"><i>Последователи</i><span
+                                    th:text="${userFollowersCount}">2.3K</span></a></li>
+                            <li><a th:href="@{/profile/{id}/followings(id=${image.user.id})}"><i>Следвани</i><span
+                                    th:text="${userFollowingCount}">279</span></a>
+                            </li>
+                        </ul>
+                        <div th:if="${image.user!=user}" th:switch="${isItFollowed}">
+                            <form th:case="${false}" th:action="@{/follow}" method="post">
+                                <input type="hidden" name="requestToFollowUser" th:value="${image.id}"/>
+                                <input type="hidden" name="image" th:value="${true}"/>
+                                <input type="submit" class="btn btn-success btn-outline btn-sm" value="Последвай"/>
+                            </form>
+                            <form th:case="${true}" th:action="@{/unfollow}" method="post">
+                                <input type="hidden" name="image" th:value="${true}"/>
+                                <input type="hidden" name="requestToFollowUser" th:value="${image.id}"/>
+                                <input type="submit" class="btn btn-success btn-outline btn-sm" value="Последвано"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- END User widget -->
+
+
+                <!-- Shot stats -->
+                <div class="sidebar-block">
+                    <ul class="single-shot-stats">
+
+                        <li th:switch="${isItLiked}">
+                            <form method="post" th:action="@{/like}" th:case="${false}">
+                                <input name="likePhoto" th:value="${image.id}" type="hidden"/>
+                                <button type="submit" class="btn-primary-like"><img src="/img/unlike.png"/></button>
+                            </form>
+                            <form method="post" th:action="@{/dislike}" th:case="${true}">
+                                <input name="unlikePhoto" th:value="${image.id}" type="hidden"/>
+                                <button type="submit" class="btn-primary-like"><img src="/img/like.png"/></button>
+                            </form>
+                            <span th:text="${likeCount}">189</span>
+
+                        </li>
+                    </ul>
+                </div>
+                <!-- END Shot stats -->
+
+                <!-- Tags -->
+                <div class="sidebar-block">
+                    <h6>Tags</h6>
+                    <div class="tag-list">
+                        <th:block th:each="hashtag : ${hashtags}">
+                            <a th:href="@{/hashtags/{hashtag}(hashtag=${hashtag.hashTag})}"
+                               th:text="${hashtag.hashTag}">Website</a>
+                        </th:block>
+                    </div>
+                </div>
+                <!-- END Tags -->
+
+                <!-- Details -->
+                <div class="sidebar-block">
+                    <h6>Детайли</h6>
+                    <dl class="half-half">
+                        <dt>Закупена от:</dt>
+                        <dd th:text="${image.description}">Някъде</dd>
+                    </dl>
+                </div>
+                <!-- END Details -->
+            </aside>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+

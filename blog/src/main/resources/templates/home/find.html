@@ -1,0 +1,34 @@
+<section>
+    <div class="container">
+        <header class="section-header">
+
+            <h3>Днес</h3>
+        </header>
+
+        <div class="row">
+
+            <th:block th:each="image : ${images}">
+            <!-- Shot -->
+            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="shot shot-small">
+                    <div class="shot-preview">
+                        <a class="img" th:href="@{/profile/images/{id}(id=${image.id})}"><img style=" height: 220px;" th:src="@{http://46.40.82.125:85/upload-dir/{id}(id=${image.pathToImage})}" alt=""/></a>
+
+                    </div>
+
+                    <div class="shot-info">
+                        <a th:href="@{profile/{id}(id=${image.user.id})}"><img style=" height: 31px;" th:src="@{http://46.40.82.125:85/{id}(id=${image.user.profilePicture})}" alt="avatar"/></a>
+                        <h6><a th:text="${image.user.fullName}" th:href="@{profile/{id}(id=${image.user.id})}">Donec vulputate justo</a></h6>
+                        <br/>
+                    </div>
+                </div>
+            </div>
+            <!-- END Shot -->
+            </th:block>
+        </div>
+
+        <br/>
+        <br/>
+
+    </div>
+</section>

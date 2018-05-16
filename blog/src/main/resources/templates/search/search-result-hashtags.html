@@ -1,0 +1,26 @@
+<section class="no-border-bottom section-sm">
+    <div class="container">
+        <header class="section-header">
+            <span>Търсене</span>
+            <h2>Резултати от търсенето</h2>
+            <p>Намерени резултати: <span th:text="${countResult}"></span></p>
+        </header>
+
+        <div class="row">
+            <th:block th:each="image : ${resultHashtags}">
+                <!-- Shot -->
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="shot shot-minimal">
+                        <div class="shot-preview">
+                            <a class="img" th:href="@{/profile/images/{id}(id=${image.id})}"><img
+                                    style=" height: 220px;" th:src="@{http://46.40.82.125:85/upload-dir/{id}(id=${image.pathToImage})}"
+                                    alt=""/></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Shot -->
+            </th:block>
+        </div>
+
+    </div>
+</section>

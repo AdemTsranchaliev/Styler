@@ -1,0 +1,73 @@
+<div class="page-links">
+    <div class="container">
+        <div class="pull-left">
+            <ul class="link-list">
+                <li><a th:href="@{/editProfile}">Профил</a></li>
+                <li><a class="active" th:href="@{/editProfileSocialNetworks}">Социални мрежи</a></li>
+                <li><a th:href="@{/editProfileSecurity}">Сигурност</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END Page links -->
+
+<section class="no-border-bottom section-sm">
+    <div class="container">
+        <header class="section-header">
+            <span>Настройки</span>
+            <h3>Социални мрежи и профили</h3>
+            <p>Свържете профила си с Facebook, Insagram,Tweeter или собствен уеб сайт</p>
+        </header>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6>Социални мрежи</h6>
+                    </div>
+
+                    <div class="card-block">
+                        <form class="form-horizontal" method="post" th:action="@{/editProfileSocialNetworks}">
+                            <div class="form-group">
+                                <label for="ownWeb" class="col-sm-2 control-label">Ваш уеб сайт</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="ownWeb" name="ownWeb" th:value="${user.ownWeb}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="facebook" class="col-sm-2 control-label">Facebook</label>
+                                <div class="col-sm-6">
+                                    <input type="text" pattern="(?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?.+" title="Невалиден формат" class="form-control" id="facebook" name="facebook" th:value="${user.facebook}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="twitter" class="col-sm-2 control-label">Twitter</label>
+                                <div class="col-sm-6">
+                                    <input type="text" pattern="(?:(?:http|https):\/\/)?(?:www.)?twitter.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?.+" title="Невалиден формат" class="form-control" id="twitter" name="twitter" th:value="${user.twitter}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="instagram" class="col-sm-2 control-label">Instagram</label>
+                                <div class="col-sm-6">
+                                    <input type="text"  pattern="(?:(?:http|https):\/\/)?(?:www.)?instagram.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?.+" title="Невалиден формат" class="form-control" id="instagram" name="instagram" th:value="${user.instagram}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-6">
+                                    <button class="btn btn-primary btn-sm" type="submit">Запази</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>

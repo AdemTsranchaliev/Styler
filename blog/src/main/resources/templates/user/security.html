@@ -1,0 +1,71 @@
+<div class="page-links">
+    <div class="container">
+        <div class="pull-left">
+            <ul class="link-list">
+                <li><a th:href="@{/editProfile}">Профил</a></li>
+                <li><a th:href="@{/editProfileSocialNetworks}">Социални мрежи</a></li>
+                <li><a class="active" th:href="@{/editProfileSecurity}">Сигурност</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END Page links -->
+
+<section class="no-border-bottom section-sm">
+    <div class="container">
+        <header class="section-header">
+            <span>Настройки</span>
+            <h3>Настройки на сигурност</h3>
+            <p>Промяна на парола</p>
+        </header>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h6>Промяна на парола</h6>
+                    </div>
+
+                    <div class="card-block">
+                        <form class="form-horizontal" method="post" th:action="@{/editProfileSecurity}">
+                            <div class="syntax-error" th:if="${passwordMatchError}">
+                                <p class="errorMsg">Паролата е грешна</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="input1" class="col-sm-4 control-label">Настояща парола</label>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control" name="currentPassword" id="input1" required="required"/>
+                                </div>
+                            </div>
+                            <div class="syntax-error" th:if="${newPasswordConfimError}">
+                                <p class="errorMsg">Паролите не съвпадат</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="input2" class="col-sm-4 control-label">Нова парола</label>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control"  name="newPassword" id="input2" minlength="8" maxlength="32" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Паролата ви трябва да съдържа най-малко една ГЛАВНА И МАЛКА БУКВА на латиница, едно ЧИСЛО и да бъде с дължина, най-малко 8 знака!" required="required"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="input3" class="col-sm-4 control-label">Повторете новата парола</label>
+                                <div class="col-sm-6">
+                                    <input type="password" class="form-control"  name="confimNewPassword" id="input3"   required="required"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-6">
+                                    <button class="btn btn-primary btn-sm" type="submit">Запази</button>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>

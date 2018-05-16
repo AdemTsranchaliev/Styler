@@ -1,0 +1,14 @@
+<center>
+    <section>
+        <h2>Наистина ли искате да изтриете визията?</h2>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <form th:action="@{/delete/{id}(id=${image.id})}" method="post">
+                <button type="submit" class="btn btn-edit btn-sm" >Да</button>
+                <a class="btn btn-delete btn-sm" th:href="@{/profile/images/{id}(id=${image.id})}">Не</a>
+            </form>
+        </div>
+
+        <br/><br/><br/><br/>
+
+    </section>
+</center>

@@ -1,0 +1,63 @@
+<div class="profile-head">
+    <div class="container">
+        <img style="height: 160px;"
+                                            th:src="@{http://46.40.82.125:85/{id}(id=${user.profilePicture})}" alt="avatar"/>
+        <h5 th:text="${user.fullName}"></h5>
+        <p class="lead" th:text="${user.motto}"></p>
+        <p th:text="${user.location}">*описние*</p>
+        <p class="lead" th:if="${visitedUserRole=='ROLE_ADMIN'}"><span>Admin</span></p>
+        <p class="lead" th:if="${visitedUserRole=='ROLE_MODERATOR'}"><span>MODERATOR</span></p>
+
+        <ul class="social-icons" >
+
+            <li>
+                <a th:if="${user.facebook!=''}" class="facebook" th:href="${user.facebook}"><i
+                        class="fa fa-facebook"></i></a>
+            </li>
+            <li>
+                <a th:if="${user.twitter!=''}" class="twitter" th:href="${user.twitter}"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li>
+                <a th:if="${user.instagram!=''}" class="instagram" th:href="${user.instagram}"><i
+                        class="fa fa-instagram"></i></a>
+            </li>
+            <li>
+                <a th:if="${user.ownWeb!=''}" th:href="${user.ownWeb}"><i class="fa fa-globe"></i></a>
+            </li>
+        </ul>
+
+        <div class="row bottom-bar">
+            <ul class="col-sm-12 col-md-6 tab-list">
+                <li  class="active"><a th:href="@{/profile}" ><i>Визии</i><span th:text="${numberOfImages}"></span></a>
+                </li>
+                <li class="hidden-xs"><a th:href="@{/profile/likes}"><i>Харесвания</i><span th:text="${countLikedImages}">1.6K</span></a></li>
+                <li><a th:href="@{/profile/followers}"><i>Последователи</i><span
+                        th:text="${userFollowersCount}">2.3K</span></a></li>
+                <li><a th:href="@{/profile/following}"><i>Следвани</i><span
+                        th:text="${userFollowingCount}">279</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- END Profile head -->
+
+<!-- User shots -->
+<section class="no-border-bottom section-sm">
+    <div class="container">
+        <div class="row">
+            <th:block th:each="image : ${images}">
+                <!-- Shot -->
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+                    <div class="shot shot-minimal">
+                        <div class="shot-preview">
+                            <a class="img" th:href="@{/profile/images/{id}(id=${image.id})}"><img
+                                    style=" height: 220px;" th:src="@{http://46.40.82.125:85/upload-dir/{id}(id=${image.pathToImage})}"
+                                    alt=""/></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- END Shot -->
+            </th:block>
+        </div>
+    </div>
+</section>

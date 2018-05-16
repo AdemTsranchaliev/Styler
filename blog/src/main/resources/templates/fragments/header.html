@@ -1,0 +1,77 @@
+<header th:fragment="header">
+    <nav class="navbar">
+        <div class="container">
+
+            <!-- Logo and navigation links -->
+            <div class="pull-left">
+                <a class="navbar-toggle" th:href="@{/}" data-toggle="offcanvas"><i class="ti-menu"></i></a>
+
+                <div class="logo">
+                    <a th:href="@{/}"><img src="/img/logo.png" alt="logo"/></a>
+                </div>
+
+                <ul class="nav-menu">
+                    <li>
+                        <a th:href="@{/}">Начало</a>
+
+                    </li>
+                    <li>
+                        <a th:href="@{/find}">Открий</a>
+
+                    </li>
+                    <li>
+                        <a th:href="@{/forUs}">За нас</a>
+
+                    </li>
+                    <li>
+                        <a th:href="@{/contactUs}">Контакти</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()" th:if="${userRole=='ROLE_ADMIN'||userRole=='ROLE_MODERATOR'}">
+                        <a th:href="@{/allUsers}">Контролен панел</a>
+                    </li>
+                    <li sec:authorize="isAuthenticated()"  th:if="${userRole=='ROLE_ADMIN'||userRole=='ROLE_MODERATOR'}">
+                        <a th:href="@{/messages}">Съобщения</a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- END Logo and navigation links -->
+
+            <!-- User account and action buttons -->
+            <div class="pull-right" sec:authorize="isAuthenticated()">
+                <a class="btn-navbar search-opener" th:href="@{/search}"><i class="ti-search"></i></a>
+                <a class="btn-navbar" th:href="@{/uploadPhoto}"><i class="ti-plus"></i></a>
+
+                <div class="dropdown user-account">
+                    <a class="dropdown-toggle" th:href="@{/}" data-toggle="dropdown">
+                        <img  th:src="@{http://46.40.82.125:85/{id}(id=${user.profilePicture})}" alt="avatar"/>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a th:href="@{/profile}">Профил</a></li>
+                        <li><a th:href="@{/editProfile}">Настройки</a></li>
+                        <li><a th:href="@{/logout}">Изход</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="pull-right" sec:authorize="isAnonymous()">
+                <ul class="quick-links">
+                    <li><a th:href="@{/login}">Влез</a></li>
+                    <li><a th:href="@{/register}">Регистрация</a></li>
+                </ul>
+            </div>
+            <!-- END User account and action buttons -->
+
+            <!-- Search screen -->
+            <div class="search-screen closed">
+                <button class="search-closer"><i class="ti-close"></i></button>
+                <form class="search-form" action="page-search.html">
+                    <input type="text" autocomplete="off" placeholder="Type to search..."/>
+                </form>
+            </div>
+            <!-- END Search screen -->
+
+        </div>
+    </nav>
+</header>

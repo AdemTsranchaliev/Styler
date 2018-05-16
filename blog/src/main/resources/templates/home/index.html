@@ -1,0 +1,182 @@
+<div class="site-header color-alt overlay-black bg-fixed" style="background-image: url(img/3.jpg)">
+    <div class="container">
+        <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8">
+            <h1>Styler</h1>
+            <h4>Купи си страхотна дреха, но не знаеш, с какво да я съчетаеш? <br/>
+                Styler ще го направи вместо теб!</h4>
+            <br/>
+            <p class="hidden-xs">Styler е платформа, в която ще намериш хиляди нови начини, по които да изразиш стила
+                си. <br/>Използвай таговете, за да насочиш онлайн стилиста към нужната ти категория. <br/>Остави всичко
+                останало в нашите ръце!</p>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 header-form-wrapper" sec:authorize="isAnonymous()">
+            <form class="header-form visible" th:action="@{/register}" method="post">
+                <div class="form-group">
+                    <input class="form-control input-lg" type="text" name="fullName" required="required"
+                           placeholder="Име"/>
+                </div>
+
+                <div class="form-group">
+                    <input class="form-control input-lg" type="email" placeholder="Email" name="email"
+                           required="required"/>
+                </div>
+
+                <div class="form-group">
+                    <input class="form-control input-lg" type="password" placeholder="Парола" name="password"
+                           required="required" minlength="8" maxlength="32"
+                           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                           title="Паролата ви трябва да съдържа най-малко една ГЛАВНА И МАЛКА БУКВА, едно ЧИСЛО и да бъде с дължина, най-малко 8 знака!"/>
+                </div>
+                <div class="form-group">
+                    <input class="form-control input-lg" type="password" placeholder="Потвърди Паролата"
+                           name="confirmPassword" required="required"/>
+                </div>
+
+                <p class="small text-muted">С регистрацията, Вие се съгласявате с <a th:href="@{/termsAndConditions}">Условията
+                    за ползване</a></p>
+                <br/>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button class="btn btn-primary btn-block" type="submit">Регистрация</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <a class="btn btn-link toggle-form-visibility" th:href="@{/login}">Влез</a>
+                    </div>
+                </div>
+            </form>
+
+            <form class="header-form form-second">
+                <div class="form-group">
+                    <input class="form-control input-lg" type="text" placeholder="Username"/>
+                </div>
+
+                <div class="form-group">
+                    <input class="form-control input-lg" type="password" placeholder="Password"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6">
+                        <button class="btn btn-primary btn-block" type="submit">Влез</button>
+                    </div>
+                    <div class="col-xs-6">
+                        <a class="btn btn-link toggle-form-visibility" th:href="@{/}">или се Регистрирай</a>
+                    </div>
+                </div>
+
+                <hr/>
+
+                <h6 class="text-uppercase no-margin-top text-center">
+                    <small>Login with</small>
+                </h6>
+                <div class="row">
+                    <div class="col-xs-4">
+                        <a class="btn btn-facebook btn-sm btn-block" th:href="@{/}"><i class="fa fa-facebook"></i></a>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <a class="btn btn-twitter btn-sm btn-block" th:href="@{/}"><i class="fa fa-twitter"></i></a>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <a class="btn btn-google btn-sm btn-block" th:href="@{/}"><i class="fa fa-google"></i></a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<section>
+    <div class="container">
+        <header class="section-header">
+            <span>НАЙ-ХАРЕСВАНИ</span>
+            <h2>ВИЗИИ</h2>
+        </header>
+
+        <div class="row">
+            <!-- Shot -->
+            <th:block th:each="image : ${images}">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="shot shot-small">
+                        <div class="shot-preview">
+                            <a class="img" th:href="@{/profile/images/{id}(id=${image.id})}"><img
+                                    style=" height: 330px;"
+                                    th:src="@{http://46.40.82.125:85/upload-dir/{id}(id=${image.pathToImage})}" alt=""/>
+                                <span class="like" th:text="${#lists.size(image.userLikes)}">782</span>
+                                <span class="black-overlay"></span>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+            <!-- END Shot -->
+
+
+        </div>
+
+    </div>
+</section>
+<!-- END Staff pick -->
+
+<!-- Featured users -->
+<section>
+    <div class="container">
+        <header class="section-header">
+            <span>НАЙ-ПОПУЛЯРНИ</span>
+            <h2>ПОТРЕБИТЕЛИ</h2>
+
+        </header>
+
+        <div class="row">
+
+            <th:block th:each="user : ${famousUsers}">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="user-widget-mini">
+                        <a th:href="@{/profile/{id}(id=${user.id})}"><img style="height: 110px;"
+                                                                          th:src="@{http://46.40.82.125:85/{id}(id=${user.profilePicture})}"
+                                                                          alt="avatar"/></a>
+                        <h5><a th:href="@{/profile/{id}(id=${user.id})}" th:text="${user.fullName}">Elena Ivanova</a>
+                        </h5>
+
+                    </div>
+                </div>
+
+            </th:block>
+
+        </div>
+
+    </div>
+</section>
+<!-- END Featured users -->
+
+
+<!-- Facts -->
+<section class="section-sm no-border-bottom overlay-black" style="background-image: url(img/5.jpg)">
+    <div class="container">
+
+        <div class="row">
+            <div class="counter color-alt col-md-4 col-sm-6">
+                <i class="fa fa-camera"></i>
+                <p th:text="${countAllImages}"></p>
+                <h6>Визии</h6>
+            </div>
+
+            <div class="counter color-alt col-md-4 col-sm-6">
+                <i class="fa fa-user"></i>
+                <p th:text="${countAllUsers}"></p>
+                <h6>Потребители</h6>
+            </div>
+
+            <div class="counter color-alt col-md-4 col-sm-6">
+                <i class="fa fa-heart"></i>
+                <p th:text="${countAllLikes}">233</p>
+                <h6>Харесвания</h6>
+            </div>
+
+
+        </div>
+
+    </div>
+</section>

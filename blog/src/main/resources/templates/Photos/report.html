@@ -1,0 +1,38 @@
+
+<section class="no-border-bottom">
+    <div class="container">
+        <header class="section-header">
+            <span>Контакти</span>
+            <h2>Докладвай ни проблем</h2>
+
+        </header>
+
+        <div class="row equal-cols">
+
+
+            <div class="col-xs-12 col-sm-12">
+
+
+
+                <div class="card">
+                    <div class="card-header">
+                        <h6>Докладвай визия</h6>
+                    </div>
+
+                    <div class="card-block">
+                        <form th:action="@{/report/{id}(id=${image.id})}" method="post" class="contact-form alt clear-fix">
+                            <input type="email" name="email" class="form-control input-lg" th:placeholder="${user.email}" disabled="disabled"/>
+                            <br/>
+                            <textarea class="form-control" name="message" rows="9" placeholder="Оплакване" required="required"></textarea>
+                            <br/>
+                            <button type="submit" class="btn btn-primary btn-block">Изпрати</button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>

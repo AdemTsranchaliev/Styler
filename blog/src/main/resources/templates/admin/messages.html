@@ -1,0 +1,28 @@
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100">
+                <table>
+                    <thead>
+                    <tr class="table100-head">
+                        <th class="column1">Email</th>
+                        <th class="column2">Message</th>
+                        <th class="column3">Option</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="message : ${messages}">
+                        <tr>
+                            <td class="column1" th:text="${message.email}"></td>
+                            <td class="column2" th:text="${message.message}">iPhone X 64Gb Grey</td>
+                            <td class="column3">
+                                <a class="btn btn-delete btn-sm" th:href="@{/message/delete/{id}(id=${message.id})}">Изтрий</a>
+                            </td>
+                        </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

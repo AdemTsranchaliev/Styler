@@ -1,0 +1,37 @@
+<div class="limiter">
+    <div class="container-table100">
+        <div class="wrap-table100">
+            <div class="table100">
+                <table>
+                    <thead>
+                    <tr class="table100-head">
+                        <th class="column1">Име</th>
+                        <th class="column2">Имейл</th>
+                        <th class="column3">Местоживеене</th>
+                        <th class="column4">Мото</th>
+                        <th class="column5">Социални медии</th>
+                        <th class="column6">Снимки</th>
+                        <th class="column7">Опции</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <th:block th:each="currentUser : ${allUsers}">
+                    <tr>
+                        <td class="column1" th:text="${currentUser.fullName}"></td>
+                        <td class="column2" th:text="${currentUser.email}">iPhone X 64Gb Grey</td>
+                        <td class="column3" th:text="${currentUser.location}">$999.00</td>
+                        <td class="column4" th:text="${currentUser.motto}">1</td>
+                        <td class="column5"><a th:href="@{/userSocialMedias/{id}(id=${currentUser.id})}">Social networks</a></td>
+                        <td class="column6"><a th:href="@{/listAllPhotos/{id}(id=${currentUser.id})}">Photos</a></td>
+                        <td class="column7">
+                            <a class="btn btn-edit btn-sm" th:href="@{/edit/profile/{id}(id=${currentUser.id})}">Редактирай</a>
+                        </td>
+                    </tr>
+                    </th:block>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

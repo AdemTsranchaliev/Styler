@@ -1,0 +1,28 @@
+<section class="no-border-bottom section-sm">
+    <div class="container">
+        <header class="section-header">
+            <span>Търсене</span>
+            <h2>Резултати от търсенето</h2>
+            <p>Намерени резултати: <span th:text="${countResult}"></span></p>
+        </header>
+
+        <div class="row equal-blocks">
+
+            <!-- User widget -->
+            <th:block th:each="userN : ${foundUsers}">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="card user-widget">
+                        <div class="card-block text-center">
+                            <a th:href="@{/profile/{id}(id=${userN.id})}"><img style=" height: 140px;"
+                                                                               th:src="@{http://46.40.82.125:85/{id}(id=${userN.profilePicture})}"
+                                                                               alt="avatar"/></a>
+                            <h5 th:text="${userN.fullName}"><a th:href="@{/profile/{id}(id=${userN.id})"></a></h5>
+                        </div>
+
+                    </div>
+                </div>
+            </th:block>
+        </div>
+
+    </div>
+</section>
